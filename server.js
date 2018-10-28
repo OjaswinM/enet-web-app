@@ -2,6 +2,9 @@ var mysql = require('mysql');
 const express = require("express");
 const app = express();
 
+app.set('view engine','ejs');
+app.use('/',express.static('public'));
+
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -29,12 +32,13 @@ app.get ('/event/city/:city',function(req , res) {
     })
   })
 
-app.get('/event/category/:category', function(req, res){
+app.get('/category/:category', function(req, res){
   con.query(`SELECT e.ename,e.venue,e.edate from eventlist e,category c where e.cid=c.cid and c.cname='${req.params.category}'`,function(err,rows,fields){
     if(err)
       console.log(err);
     else {
       console.log(rows);
+      res.render('category', { data : rows , title : req.params.category});
     }
   })
 } )
@@ -44,6 +48,7 @@ app.get('/event',function(req , res){
     if(err)
       console.log(err);
     else {
+      res.render('index',{ data : rows });
       console.log(rows);
     }
   });

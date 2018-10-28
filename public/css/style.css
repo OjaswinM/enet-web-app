@@ -952,7 +952,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   border-bottom: 1px solid #cad4f6;
   padding-top: 15px;
   padding-bottom: 15px;
-  transition: background-color ease-in-out 0.3s;
+  
 }
 
 #schedule .schedule-item:hover {
