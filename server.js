@@ -20,14 +20,14 @@ con.connect(function(err) {
   }
   });
 
-app.get ('/event/city/:city',function(req , res) {
+app.get ('/city/:city',function(req , res) {
 
     con.query( `SELECT e.ename,e.venue, e.edate FROM eventlist AS e,location AS l where e.eid=l.eid and l.city='${req.params.city}'`, function(err,rows,fields) {
       if(err)
         console.log(err);
       else {
         console.log(rows);
-      // res.render('one',{data:rows[0]})
+        res.render('city',{ data:rows , title : req.params.city });
         }
     })
   })
