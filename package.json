@@ -1,0 +1,24 @@
+{
+  "name": "enet-web-app",
+  "version": "1.0.0",
+  "description": "Event sharing portal",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OjaswinM/enet-web-app.git"
+  },
+  "author": "Adith and Ojaswin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OjaswinM/enet-web-app/issues"
+  },
+  "homepage": "https://github.com/OjaswinM/enet-web-app#readme"
+}
