@@ -713,7 +713,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #speakers .speaker .details {
-  background: rgba(6, 12, 34, 0.76);
+  background: rgba(6, 12, 34, 0.6);
   position: absolute;
   left: 0;
   bottom: -30px;
@@ -725,15 +725,15 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #speakers .speaker .details h3 {
   color: #fff;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 2px;
 }
 
 #speakers .speaker .details p {
   color: #fff;
-  font-size: 17px;
-  margin-bottom: 5px;
+  font-size: 14px;
+  margin-bottom: 15px;
   font-style: italic;
 }
 
@@ -813,7 +813,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #speakers1 .speaker .details {
-  background: rgba(6, 12, 34, 0.76);
+  background: rgba(6, 12, 34, 0.6);
   position: absolute;
   left: 0;
   bottom: -30px;
@@ -825,15 +825,15 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #speakers1 .speaker .details h3 {
   color: #fff;
-  font-size: 22px;
+  font-size: 15px;
   font-weight: 600;
   margin-bottom: 2px;
 }
 
 #speakers1 .speaker .details p {
   color: #fff;
-  font-size: 17px;
-  margin-bottom: 5px;
+  font-size: 12px;
+  margin-bottom: 14px;
   font-style: italic;
 }
 
