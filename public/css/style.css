@@ -910,6 +910,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   padding: 60px 0 60px 0;
 }
 
+
 #schedule .nav-tabs {
   text-align: center;
   margin: auto;
@@ -944,8 +945,13 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin: 0 auto 30px auto;
 }
 
+#schedule event-by-date {
+  width:100%;
+}
+
 #schedule .tab-pane {
   transition: ease-in-out .2s;
+  margin:auto;
 }
 
 #schedule .schedule-item {
@@ -985,6 +991,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 5px;
+  text-transform: capitalize;
 }
 
 #schedule .schedule-item h4 span {

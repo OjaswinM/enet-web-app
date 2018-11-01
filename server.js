@@ -5,7 +5,7 @@ const app = express();
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "password",
+  password: "shivin",
   database:"eventman"
 });
 
@@ -16,6 +16,9 @@ con.connect(function(err) {
     console.log('success');
   }
   });
+
+app.use(express.static("public"));
+// app.use(express.static(__dirname + "/public"));
 
 app.get ('/event/city/:city',function(req , res) {
 
@@ -44,11 +47,12 @@ app.get('/event',function(req , res){
     if(err)
       console.log(err);
     else {
-      console.log(rows);
+      res.send(JSON.stringify(rows));
+      res.end();
     }
   });
 })
 
-app.listen(3000, () => {
+app.listen(1237, () => {
   console.log("Server running up on port 3000");
 })

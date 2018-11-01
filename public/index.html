@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app='event'>
 
 <head>
   <meta charset="utf-8">
@@ -7,6 +7,13 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
+
+  <!--AngularJS-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.js"></script>
+
+  <!--Scripts-->
+  <script src="app/main.js" type="application/javascript"></script>
+  <script src="app/components/event-by-date.component.js" type="application/javascript"></script>
 
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
@@ -236,7 +243,8 @@
         <div class="tab-content row justify-content-center">
 
           <!-- Schdule Day 1 -->
-          <div role="tabpanel" class="col-lg-9 tab-pane fade show active" id="day-1">
+          <event-by-date></event-by-date>
+          <!-- <div class="col-lg-9 tab-pane fade show active" id="day-1">
 
             <div class="row schedule-item">
               <div class="col-md-2"><time>09:30 AM</time></div>
@@ -315,7 +323,7 @@
               </div>
             </div>
 
-          </div>
+          </div> -->
           <!-- End Schdule Day 1 -->
 
           <!-- Schdule Day 2 -->
