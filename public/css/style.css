@@ -952,7 +952,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   border-bottom: 1px solid #cad4f6;
   padding-top: 15px;
   padding-bottom: 15px;
-  
+
 }
 
 #schedule .schedule-item:hover {
@@ -1477,7 +1477,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #contact .form input,
-#contact .form textarea {
+#contact .form textarea,
+#contact .form select,
+{
   padding: 10px 14px;
   border-radius: 0;
   box-shadow: none;
