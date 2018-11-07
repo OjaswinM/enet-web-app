@@ -1,6 +1,12 @@
 var mysql = require('mysql');
 const express = require("express");
+const cors = require("cors");
 const app = express();
+
+var corsOptions = {
+    origin: "localhost:1237",
+    optionSuccessStatus: 200
+}
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -17,36 +23,53 @@ con.connect(function(err) {
   }
   });
 
+app.use(cors(corsOptions));
+
 app.use(express.static("public"));
 // app.use(express.static(__dirname + "/public"));
 
+app.get('/event/:eventId',function(req , res){
+  con.query(`SELECT e.eid,e.ename,e.venue,e.edate,ed.disc,c.cname FROM (eventlist e JOIN eventdisc ed ON e.eid=ed.eid) JOIN category c on e.cid=c.cid WHERE e.eid = ${req.params.eventId}`,function(err,rows,fields){
+    if(err)
+      console.log(err);
+    else {
+      console.log(JSON.stringify(rows))
+      res.send(JSON.stringify(rows));
+      res.end();
+    }
+  });
+})
+
 app.get ('/event/city/:city',function(req , res) {
 
-    con.query( `SELECT e.ename,e.venue, e.edate FROM eventlist AS e,location AS l where e.eid=l.eid and l.city='${req.params.city}'`, function(err,rows,fields) {
+    con.query( `SELECT e.eid,e.ename,e.venue, e.edate FROM eventlist AS e,location AS l where e.eid=l.eid and l.city='${req.params.city}'`, function(err,rows,fields) {
       if(err)
         console.log(err);
       else {
-        console.log(rows);
+        res.send(JSON.stringify(rows));
+        res.end();
       // res.render('one',{data:rows[0]})
         }
     })
   })
 
-app.get('/event/category/:category', function(req, res){
-  con.query(`SELECT e.ename,e.venue,e.edate from eventlist e,category c where e.cid=c.cid and c.cname='${req.params.category}'`,function(err,rows,fields){
+app.get('/event/category/:categoryId', function(req, res){
+  con.query(`SELECT eid,e.ename,e.venue,e.edate from eventlist e where e.cid='${req.params.categoryId}'`,function(err,rows,fields){
     if(err)
       console.log(err);
     else {
-      console.log(rows);
+      res.send(JSON.stringify(rows));
+      res.end();
     }
   })
 } )
 
 app.get('/event',function(req , res){
-  con.query(`SELECT ename,venue,edate from eventlist order by edate`,function(err,rows,fields){
+  con.query(`SELECT eid,ename,venue,edate from eventlist order by edate`,function(err,rows,fields){
     if(err)
       console.log(err);
     else {
+      console.log("GET");
       res.send(JSON.stringify(rows));
       res.end();
     }
