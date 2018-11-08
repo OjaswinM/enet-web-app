@@ -253,27 +253,57 @@
         </div> -->
       <div class="form">
       <form class="" action="/event" method="post">
-          <input type="text" name="ename" class="form-control" id="ename" placeholder="Your Name"/>
+         <div class="form-group">
+           <input type="text" name="ename" class="form-control" id="ename" placeholder="Your Name"/>
+         </div>
+          <div class="form-group">
           <input type="text" class="form-control" name="venue"  placeholder="Venue" />
+          </div>
+          <div class="row">
 
+          <div class="col-md-4">
+
+
+          <div class="form-group">
           <select class="form-control"   name="cid">
               <option value="1">Concert and Shows</option>
               <option value="2">Technical</option>
               <option value="4">Adventure and sports</option>
           </select>
+          </div>
+
+        </div>
+        <div class="col-md-4">
+
+
+          <div class="form-group">
           <select class="form-control"   name="city">
               <option value="bangalore">Bangalore</option>
               <option value="delhi">Delhi</option>
               <option value="mumbai">Mumbai</option>
           </select>
-          <input type="date" name="edate"/>
+        </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
           <select class="form-control"   name="oid">
               <option value="1">techman</option>
               <option value="2">favshow</option>
               <option value="3">silentlook</option>
           </select>
+          </div>
+        </div>
+          
+
+          </div>
+
+          <div class="form-group">
+          <input type="date" name="edate"/>
+          </div>
+          <div class="form-group">
           <textarea class="form-control" rows="5" name="comment"></textarea>
-          <div class="text-center"><input type="submit" value="send" /></div>
+          </div>
+          <div class="text-center"><button class="btn btn-dark" type="submit">Submit</button></div>
       </form>
     </div>
       </div>

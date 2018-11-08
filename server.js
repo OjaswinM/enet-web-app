@@ -69,7 +69,7 @@ app.post('/event', urlencodedParser , function(req , res ){
         con.query(`insert into eventdisc(eid,disc,ename,venue) values(?,?,?,?)`,[rows[0].eid, req.body.comment , req.body.ename, req.body.venue]);
     });
 
-//      console.log(req.body);
+//     console.log(req.body);
       res.redirect('back');
 
 })
