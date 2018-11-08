@@ -1,0 +1,19 @@
+#del-but{
+  font-size: 13px;
+  width:90px;
+  border-radius: 30px;
+}
+
+
+#nodec:hover, #nodec:visited, #nodec:link, #nodec:active
+{
+    text-decoration: none;
+}
+
+#nodec{
+  color: #112363;
+}
+
+#nodec:hover{
+  color:#f82249;
+}

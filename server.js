@@ -28,6 +28,17 @@ app.use(cors(corsOptions));
 app.use(express.static("public"));
 // app.use(express.static(__dirname + "/public"));
 
+app.delete('/edit/delete/:eventId',function(req , res){
+  con.query(`DELETE from eventlist WHERE eid=${req.params.eventId}`,function(err,rows,fields){
+    if(err)
+      console.log(err);
+    else {
+      console.log(`deleted ${req.params.ename}`);
+      res.end();
+    }
+  });
+})
+
 app.get('/event/:eventId',function(req , res){
   con.query(`SELECT e.eid,e.ename,e.venue,e.edate,ed.disc,c.cname FROM (eventlist e JOIN eventdisc ed ON e.eid=ed.eid) JOIN category c on e.cid=c.cid WHERE e.eid = ${req.params.eventId}`,function(err,rows,fields){
     if(err)
@@ -76,6 +87,6 @@ app.get('/event',function(req , res){
   });
 })
 
-app.listen(1237, () => {
+app.listen(1238, () => {
   console.log("Server running up on port 3000");
 })
