@@ -262,7 +262,7 @@ h6 {
 
 /* Nav Meu Styling */
 
-.nav-menu a {
+/*.nav-menu a {
   padding: 8px;
   text-decoration: none;
   display: inline-block;
@@ -271,7 +271,7 @@ h6 {
   font-weight: 600;
   font-size: 14px;
   outline: none;
-}
+} */
 
 .nav-menu .menu-active a,
 .nav-menu a:hover {
@@ -1481,9 +1481,14 @@ body.mobile-nav-active #mobile-nav-toggle {
 #contact .form select,
 {
   padding: 10px 14px;
+  border: 1px solid blue;
   border-radius: 0;
   box-shadow: none;
   font-size: 15px;
+}
+
+input[type="text"],textarea,select {
+  border: 1px solid #7e7e7e;
 }
 
 #contact .form button[type="submit"] {

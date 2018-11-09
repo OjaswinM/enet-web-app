@@ -74,29 +74,65 @@
     <section id="schedule" class="section-with-bg">
       <div class="container wow">
         <div class="section-header">
-          <h2> <%= title %> </h2>
+          <h2>EDIT FORM</h2>
 
         </div>
-
-<!--       <div class="tab-content row justify-content-center"> <-->
-
-
-         <% data.forEach(function(ele ){  %>
-
-        <a href="/event/eventdisc/<%=ele.eid %>">
-         <div class="row schedule-item">
-          <div class="col-lg-2" style="color:black"><%=ele.edate.toDateString() %></div>
-           <div class="col-lg-10">
-   <!--          <div class="speaker">
-               <img src="img/speakers/1.jpg" alt="Brenden Legros">
-             </div> <-->
-             <h4><%=ele.ename %></h4>
-             <p><%=ele.venue%></p>
+        <div class="form">
+        <form method="POST" action="/event/edit?_method=PUT&person=<%=data.eid %>">
+           <div class="form-group">
+             <input type="text" name="ename" class="form-control" id="ename" value="<%= data.ename %>" >
            </div>
-         </div>
-       </a>
-     <%    });  %>
+            <div class="form-group">
+            <input type="text" class="form-control" name="venue"  value="<%=data.venue%>" >
+            </div>
 
+            <div class="row">
+
+            <div class="col-md-4">
+
+
+            <div class="form-group">
+            <select class="form-control" style="border: 1px solid #7e7e7e"  name="cid">
+                <option value="1">Concert and Shows</option>
+                <option value="2">Technical</option>
+                <option value="4">Adventure and sports</option>
+            </select>
+            </div>
+
+          </div>
+          <div class="col-md-4">
+
+
+            <div class="form-group">
+            <select class="form-control" style="border: 1px solid #7e7e7e"  name="city">
+                <option value="bangalore">Bangalore</option>
+                <option value="delhi">Delhi</option>
+                <option value="mumbai">Mumbai</option>
+            </select>
+          </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+            <select class="form-control" style="border: 1px solid #7e7e7e"  name="oid">
+                <option value="1">techman</option>
+                <option value="2">favshow</option>
+                <option value="3">silentlook</option>
+            </select>
+            </div>
+          </div>
+
+
+            </div>
+
+            <div class="form-group">
+            <input type="date"  id="demo" name="edate">
+            </div>
+            <div class="form-group">
+            <textarea class="form-control" rows="5" style="border: 1px solid #7e7e7e" name="comment"><%= data.disc%></textarea>
+            </div>
+            <div class="text-center"><button class="btn btn-dark" type="submit">Submit</button></div>
+        </form>
+        </div>
       </div>
 
     </section>
@@ -180,7 +216,20 @@
   </footer><!-- #footer -->
 
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+  <script>
+    var str=new Date("<%= data.edate%>");
+    console.log(str);
+     var month = '' + (str.getMonth() + 1);
+      var day = '' + str.getDate();
+    var year = str.getFullYear();
 
+   if (month.length < 2) month = '0' + month;
+   if (day.length < 2) day = '0' + day;
+
+   var yar=[year, month, day].join('-');
+   document.getElementById("demo").value = yar;
+
+  </script>
   <!-- JavaScript Libraries -->
   <script src="/lib/jquery/jquery.min.js"></script>
   <script src="/lib/jquery/jquery-migrate.min.js"></script>

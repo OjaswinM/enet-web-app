@@ -51,16 +51,7 @@
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-    <!--      <li class="menu-active"><a href="#intro">Home</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#speakers">Speakers</a></li>
-          <li><a href="index.html#schedule">Schedule</a></li>
-          <li><a href="index.html#venue">Venue</a></li>
-          <li><a href="index.html#hotels">Hotels</a></li>
-          <li><a href="index.html#gallery">Gallery</a></li>
-          <li><a href="index.html#sponsors">Sponsors</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-          <li class="buy-tickets"><a href="index.html#buy-tickets">Buy Tickets</a></li> <-->
+
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -71,43 +62,48 @@
     <!--==========================
       Speaker Details Section
     ============================-->
-    <section id="schedule" class="section-with-bg">
+  <section style="padding-top:100px;padding-bottom:100px">
+
+
       <div class="container wow">
         <div class="section-header">
-          <h2> <%= title %> </h2>
+          <h2> EVENT DETAILS </h2>
+
+        </div>
+        <div>
+          <h2 style="float:right"><%= data.edate.toDateString() %></h2>
+          <h2 style="font-weight: 530"><%= data.ename %>   </h2>
+
+        </div>
+        <div>
+            <i><p> <%= data.venue %> </p></i>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <p style="padding-left:0;margin-left:0"><%=data.disc %></p>
+            </div>
+
 
         </div>
 
-<!--       <div class="tab-content row justify-content-center"> <-->
-
-
-         <% data.forEach(function(ele ){  %>
-
-        <a href="/event/eventdisc/<%=ele.eid %>">
-         <div class="row schedule-item">
-          <div class="col-lg-2" style="color:black"><%=ele.edate.toDateString() %></div>
-           <div class="col-lg-10">
-   <!--          <div class="speaker">
-               <img src="img/speakers/1.jpg" alt="Brenden Legros">
-             </div> <-->
-             <h4><%=ele.ename %></h4>
-             <p><%=ele.venue%></p>
-           </div>
-         </div>
-       </a>
-     <%    });  %>
 
       </div>
 
-    </section>
+</section>
+
+
+
 
   </main>
+
 
 
   <!--==========================
     Footer
   ============================-->
   <footer id="footer">
+
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -191,6 +187,7 @@
   <script src="/lib/wow/wow.min.js"></script>
   <script src="/lib/venobox/venobox.min.js"></script>
   <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+
 
   <!-- Contact Form JavaScript File -->
   <script src="/contactform/contactform.js"></script>

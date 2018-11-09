@@ -74,7 +74,7 @@
     <section id="schedule" class="section-with-bg">
       <div class="container wow">
         <div class="section-header">
-          <h2> <%= title %> </h2>
+          <h2> DELETE AN EVENT </h2>
 
         </div>
 
@@ -83,18 +83,25 @@
 
          <% data.forEach(function(ele ){  %>
 
-        <a href="/event/eventdisc/<%=ele.eid %>">
+
          <div class="row schedule-item">
-          <div class="col-lg-2" style="color:black"><%=ele.edate.toDateString() %></div>
-           <div class="col-lg-10">
+          <div class="col-lg-2"><%=ele.edate.toDateString() %></div>
+           <div class="col-lg-8">
    <!--          <div class="speaker">
                <img src="img/speakers/1.jpg" alt="Brenden Legros">
              </div> <-->
              <h4><%=ele.ename %></h4>
              <p><%=ele.venue%></p>
            </div>
+           <div class="col-lg-1">
+          <a href="/event/edit/<%=ele.eid %>"><button type="button" class="btn btn-primary" name="button">Edit</button></a>   
+           </div>
+           <div class="col-lg-1">
+             <form method="POST" action="/resource?_method=DELETE&person=<%=ele.eid %>">
+               <button type="submit" class="btn btn-danger">Delete</button>
+             </form>
+           </div>
          </div>
-       </a>
      <%    });  %>
 
       </div>

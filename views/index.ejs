@@ -55,7 +55,7 @@
           <li><a href="#about"></a></li>
           <li><a href="#speakers"></a></li>
           <li><a href="#schedule"></a></li> -->
-          <li class="buy-tickets"><a href="#buy-tickets">Search</a></li>
+          <li><a href="event/deletion"><button class="btn btn-danger" style="padding:5px 10px">DELETE EVENT</button></a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -191,8 +191,8 @@
             <% data.forEach(function(ele ){  %>
 
 
-            <div class="row schedule-item">
-              <div class="col-md-2"><%=ele.edate.toDateString() %></div>
+        <a href="event/eventdisc/<%=ele.eid %>">  <div class="row schedule-item">
+              <div class="col-md-2" style="color:black"><%=ele.edate.toDateString() %></div>
               <div class="col-md-10">
       <!--          <div class="speaker">
                   <img src="img/speakers/1.jpg" alt="Brenden Legros">
@@ -200,7 +200,7 @@
                 <h4><%=ele.ename %></h4>
                 <p><%=ele.venue%></p>
               </div>
-            </div>
+            </div></a>
         <%    });  %>
 
 
@@ -254,10 +254,10 @@
       <div class="form">
       <form class="" action="/event" method="post">
          <div class="form-group">
-           <input type="text" name="ename" class="form-control" id="ename" placeholder="Your Name"/>
+           <input type="text" name="ename" class="form-control" id="ename" placeholder="Your Name" required>
          </div>
           <div class="form-group">
-          <input type="text" class="form-control" name="venue"  placeholder="Venue" />
+          <input type="text" class="form-control" name="venue"  placeholder="Venue" required>
           </div>
           <div class="row">
 
@@ -265,7 +265,7 @@
 
 
           <div class="form-group">
-          <select class="form-control"   name="cid">
+          <select class="form-control" style="border: 1px solid #7e7e7e"  name="cid" >
               <option value="1">Concert and Shows</option>
               <option value="2">Technical</option>
               <option value="4">Adventure and sports</option>
@@ -277,7 +277,7 @@
 
 
           <div class="form-group">
-          <select class="form-control"   name="city">
+          <select class="form-control" style="border: 1px solid #7e7e7e"  name="city">
               <option value="bangalore">Bangalore</option>
               <option value="delhi">Delhi</option>
               <option value="mumbai">Mumbai</option>
@@ -286,22 +286,22 @@
         </div>
         <div class="col-md-4">
           <div class="form-group">
-          <select class="form-control"   name="oid">
+          <select class="form-control" style="border: 1px solid #7e7e7e"  name="oid">
               <option value="1">techman</option>
               <option value="2">favshow</option>
               <option value="3">silentlook</option>
           </select>
           </div>
         </div>
-          
+
 
           </div>
 
           <div class="form-group">
-          <input type="date" name="edate"/>
+          <input type="date" name="edate" required>
           </div>
           <div class="form-group">
-          <textarea class="form-control" rows="5" name="comment"></textarea>
+          <textarea class="form-control" rows="5" style="border: 1px solid #7e7e7e" name="comment"></textarea>
           </div>
           <div class="text-center"><button class="btn btn-dark" type="submit">Submit</button></div>
       </form>
