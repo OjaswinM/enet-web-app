@@ -262,7 +262,7 @@ h6 {
 
 /* Nav Meu Styling */
 
-/*.nav-menu a {
+.nav-menu a {
   padding: 8px;
   text-decoration: none;
   display: inline-block;
@@ -271,7 +271,7 @@ h6 {
   font-weight: 600;
   font-size: 14px;
   outline: none;
-} */
+} 
 
 .nav-menu .menu-active a,
 .nav-menu a:hover {
