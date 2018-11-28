@@ -61,6 +61,10 @@
           <li><a href="index.html#sponsors">Sponsors</a></li>
           <li><a href="index.html#contact">Contact</a></li>
           <li class="buy-tickets"><a href="index.html#buy-tickets">Buy Tickets</a></li> <-->
+          <li><a href="/event/add">ADD</a></li>
+          <li><a href="/event/deletion">EDIT</a></li>
+          <li><a href="/login">LOGIN</a></li>
+          <li><a href="/logout">LOGOUT</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -88,7 +92,7 @@
 
             <div class="row">
 
-            <div class="col-md-4">
+            <div class="col-md-6">
 
 
             <div class="form-group">
@@ -100,27 +104,17 @@
             </div>
 
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
 
 
             <div class="form-group">
             <select class="form-control" style="border: 1px solid #7e7e7e"  name="city">
-                <option value="bangalore">Bangalore</option>
-                <option value="delhi">Delhi</option>
-                <option value="mumbai">Mumbai</option>
+                <option value="1">Bangalore</option>
+                <option value="2">Delhi</option>
+                <option value="3">Mumbai</option>
             </select>
           </div>
           </div>
-          <div class="col-md-4">
-            <div class="form-group">
-            <select class="form-control" style="border: 1px solid #7e7e7e"  name="oid">
-                <option value="1">techman</option>
-                <option value="2">favshow</option>
-                <option value="3">silentlook</option>
-            </select>
-            </div>
-          </div>
-
 
             </div>
 
@@ -130,7 +124,28 @@
             <div class="form-group">
             <textarea class="form-control" rows="5" style="border: 1px solid #7e7e7e" name="comment"><%= data.disc%></textarea>
             </div>
-            <div class="text-center"><button class="btn btn-dark" type="submit">Submit</button></div>
+            <div class="section-header">
+              <h2>EDIT ORGANISER DETAILS</h2>
+
+            </div>
+            <div class="form-group">
+              <input type="text" name="oname" class="form-control" id="oname" value="<%= data.oname %>" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                <input type="text" class="form-control" name="ophone"  value="<%= data.ophone%>" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                <input type="email" class="form-control" name="oemail" style="border: 1px solid #7e7e7e" value="<%= data.oemail%>" required>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="text-center"><button class="btn btn-danger" type="submit">Submit</button></div>
         </form>
         </div>
       </div>

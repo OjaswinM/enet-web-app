@@ -8,16 +8,16 @@ var session  = require('express-session');
 var passport = require('passport');
 var flash    = require('connect-flash');
 var cookieParser = require('cookie-parser');
-app.use(cookieParser()); // read cookies (needed for auth)
-require('./rename/passport')(passport); // pass passport for configuration
+app.use(cookieParser());
+require('./rename/passport')(passport);
 app.use(session({
 	secret: 'boomboomboom',
 	resave: true,
 	saveUninitialized: true
  } )); // session secret
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(passport.session());
+app.use(flash());
 
 
 app.set('view engine','ejs');
@@ -46,7 +46,7 @@ con.connect(function(err) {
 
 app.get ('/city/:city', function(req , res) {
 
-    con.query( `SELECT e.eid,e.ename,e.venue, e.edate FROM eventlist AS e,location AS l where e.eid=l.eid and l.city='${req.params.city}'`, function(err,rows,fields) {
+    con.query( `SELECT e.eid,e.ename,e.venue, e.edate FROM eventlist AS e,location AS l where e.lid=l.lid and l.city='${req.params.city}'`, function(err,rows,fields) {
       if(err)
         console.log(err);
       else {
@@ -68,7 +68,7 @@ app.get('/category/:category', function(req, res){
 } )
 
 app.get('/event', function(req , res){
-  con.query(`SELECT eid,ename,venue,edate from eventlist order by edate limit 5`,function(err,rows,fields){
+  con.query(`SELECT eid,ename,venue,edate from eventlist where edate>CURDATE() order by edate limit 5`,function(err,rows,fields){
     if(err)
       console.log(err);
     else {
@@ -94,7 +94,8 @@ app.get('/event/add', isLoggedIn, function(req, res){
         con.query(`insert into location values(?,?)`, [ rows[0].eid , req.body.city]);
         con.query(`insert into eventdisc(eid,disc,ename,venue) values(?,?,?,?)`,[rows[0].eid, req.body.comment , req.body.ename, req.body.venue]);
     }); */
-    con.query(`CALL tresin(?,?,?,?,?,?,?)`,[ req.body.ename ,req.body.venue, req.body.cid , req.body.oid, req.body.edate , req.body.city , req.body.comment], function(err,rows){
+	
+    con.query(`CALL tresin(?,?,?,?,?,?,?,?,?)`,[req.body.oname,req.body.ophone,req.body.oemail, req.body.ename ,req.body.venue, req.body.cid , req.body.edate , req.body.city , req.body.comment], function(err,rows){
       if(err)
         console.log(err);
       else {
@@ -107,7 +108,7 @@ app.get('/event/add', isLoggedIn, function(req, res){
 
 })
 app.get('/event/eventdisc/:eventid', function(req,res){
-  con.query(`select e.ename,e.venue,e.disc,d.edate from eventdisc e , eventlist d where e.eid=d.eid and e.eid=${req.params.eventid}`,function(err,rows,fields){
+  con.query(`select e.ename,e.venue,d.disc,e.edate from eventdisc d , eventlist e where e.eid=d.eid and d.eid=${req.params.eventid}`,function(err,rows,fields){
     if(err)
       console.log(err);
     else {
@@ -117,7 +118,7 @@ app.get('/event/eventdisc/:eventid', function(req,res){
   })
 })
 app.get('/event/edit/:eid', isLoggedIn ,function(req,res){
-  con.query(`select e.eid,e.ename,e.venue,e.disc,d.edate from eventdisc e , eventlist d where e.eid=d.eid and e.eid=${req.params.eid}`,function(err,rows,fields){
+  con.query(`select o.oname,o.ophone,o.oemail,e.eid,e.ename,e.venue,d.disc,e.edate from organiser o,eventdisc d , eventlist e where e.eid=d.eid and e.oid=o.oid and e.eid=${req.params.eid}`,function(err,rows,fields){
     if(err)
       console.log(err);
     else {
@@ -129,7 +130,7 @@ app.get('/event/edit/:eid', isLoggedIn ,function(req,res){
 })
 app.use(methodOverride('_method'));
 app.put('/event/edit', function (req , res) {
-   con.query(`update eventlist set ename="${req.body.ename}",edate="${req.body.edate}",cid="${req.body.cid}",oid="${req.body.oid}",venue="${req.body.venue}" where eid=?`,[req.query.person], function(err,fields){
+   con.query(`update eventlist set ename="${req.body.ename}",edate="${req.body.edate}",cid="${req.body.cid}",venue="${req.body.venue}" where eid=?`,[req.query.person], function(err,fields){
     if(err)
       console.log(err);
       else {
@@ -138,8 +139,8 @@ app.put('/event/edit', function (req , res) {
 
   });
 
-  con.query(`update eventdisc set disc="${req.body.comment}",ename="${req.body.ename}",venue="${req.body.venue}" where eid=? `,[req.query.person]);
-  con.query(`update location set city="${req.body.city}" where eid=?`,[req.query.person] , function(err , result){
+  con.query(`update eventdisc set disc="${req.body.comment}" where eid=? `,[req.query.person]);
+  con.query(`update organiser set oname="${req.body.oname}",ophone="${req.body.ophone}",oemail="${req.body.oemail}" where oid=(select oid from eventlist where eid=?)`,[req.query.person] , function(err , result){
     if(err)
       console.log(err);
     else
@@ -158,7 +159,7 @@ app.get('/event/deletion', isLoggedIn , function(req,res){
     }
  })
 })
-// override with POST having ?_method=DELETE
+
 
 app.delete('/resource', function(req , res){
   con.query(`DELETE from eventlist where eid=?`,[req.query.person],function(err,rows,fields){
@@ -175,15 +176,15 @@ app.delete('/resource', function(req , res){
 
 app.get('/login', function(req, res) {
 
-		// render the page and pass in any flash data if it exists
+
 		res.render('login', { message: req.flash('loginMessage') });
 	});
 
-	// process the login form
+
 	app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/event', // redirect to the secure profile section
-            failureRedirect : '/login', // redirect back to the signup page if there is an error
-            failureFlash : true // allow flash messages
+            successRedirect : '/event',
+            failureRedirect : '/login',
+            failureFlash : true
 		}),
         function(req, res) {
             console.log("hello");
@@ -196,20 +197,17 @@ app.get('/login', function(req, res) {
         res.redirect('/event');
     });
 
-	// =====================================
-	// SIGNUP ==============================
-	// =====================================
-	// show the signup form
+
 	app.get('/signup', function(req, res) {
-		// render the page and pass in any flash data if it exists
+
 		res.render('signup', { message: req.flash('signupMessage') });
 	});
 
-	// process the signup form
+
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect : '/login', // redirect to the secure profile section
-		failureRedirect : '/signup', // redirect back to the signup page if there is an error
-		failureFlash : true // allow flash messages
+		successRedirect : '/login',
+		failureRedirect : '/signup',
+		failureFlash : true
 	}));
   app.get('/logout', function(req, res) {
 		req.logout();
@@ -217,11 +215,10 @@ app.get('/login', function(req, res) {
 	});
   function isLoggedIn(req, res, next) {
 
-	// if user is authenticated in the session, carry on
 	if (req.isAuthenticated())
 		return next();
 
-	// if they aren't redirect them to the home page
+
 	res.redirect('/login');
 }
 
